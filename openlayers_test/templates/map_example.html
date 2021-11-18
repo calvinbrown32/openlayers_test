@@ -24,10 +24,29 @@
           })
         ],
         view: new ol.View({
-          center: ol.proj.fromLonLat([37.41, 8.82]),
+          center: ol.proj.fromLonLat({{data_centroid}}),
           zoom: 4
         })
       });
+
+
+    const parsed_complaints = {{cb3_complaints|tojson}}
+    var vectorLayer = new ol.source.Vector({
+        source: new ol.source.GeoJSON({
+          url: 'parsed_complaints',
+          format: new ol.format.GeoJSON()
+        })
+      });
+      console.log(parsed_complaints)
+
+      // Add Vector layer to map
+     map.addLayer(vectorLayer);
+
+
+});
+
+
+
     </script>
   </body>
 </html>
