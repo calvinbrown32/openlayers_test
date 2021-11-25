@@ -11,42 +11,67 @@
     </style>
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.8.1/build/ol.js"></script>
     <title>OpenLayers example</title>
+
   </head>
   <body>
     <h2>My Map</h2>
+      <script type="text/javascript" src="{{url_for('static', filename='main.js')}}"></script>
+      <script type="text/javascript">
+
+   </script>
+
     <div id="map" class="map"></div>
-    <script type="text/javascript">
-      var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()
-          })
-        ],
-        view: new ol.View({
-          center: ol.proj.fromLonLat({{data_centroid}}),
-          zoom: 4
-        })
-      });
 
 
-    const parsed_complaints = {{cb3_complaints|tojson}}
-    var vectorLayer = new ol.source.Vector({
-        source: new ol.source.GeoJSON({
-          url: 'parsed_complaints',
-          format: new ol.format.GeoJSON()
-        })
-      });
-      console.log(parsed_complaints)
+  <script>
 
-      // Add Vector layer to map
-     map.addLayer(vectorLayer);
+<!--=============================================================-->
+<!--CREATE NEW VECTOR LAYER FROM URL-->
+<!--var osmLayer = new ol.layer.Vector({-->
+<!--    source: new.ol.source.Vector({-->
+<!--    format: new ol.format.GeoJSON(),-->
+<!--    url:-->
+<!-- })-->
+<!-- })-->
+<!--    map.addLayer(osmLayer);-->
+<!--=============================================================-->
+
+<!--TO DO: PASS DATA FROM PYTHON FLASK TO JAVASCRIPT STATIC FILE -->
+<!--https://stackoverflow.com/questions/37259740/passing-variables-from-flask-to-javascript/37259995#37259995-->
+<!--https://stackoverflow.com/questions/37259740/passing-variables-from-flask-to-javascript-->
 
 
-});
+<!--BRING IN cb3_complaints FROM FLASK APP USING JINJA -->
+const parsed_complaints = {{cb3_complaints|tojson}}
+console.log("parsed_complaints is:\n" + parsed_complaints)
 
 
+<!--    CREATE GEOJSON LAYER FROM GEOJSON OBJECT-->
+var cb3complaints = new ol.layer.Vector({
+        source: new ol.source.Vector({
+        features: (new ol.format.GeoJSON({ featureProjection: 'EPSG:3857' })).readFeatures(parsed_complaints)
+      })
+      })
 
-    </script>
+  var map = new ol.Map({
+    target: 'map',
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM()
+      }),
+      cb3complaints
+    ],
+    view: new ol.View({
+      center: ol.proj.fromLonLat({{data_centroid}}),
+      zoom: 9
+    })
+  });
+
+  console.log(vectorLayer2)
+
+  </script>
+
+
   </body>
 </html>
+

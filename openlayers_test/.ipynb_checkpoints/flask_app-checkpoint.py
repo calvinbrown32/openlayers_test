@@ -14,7 +14,7 @@ from datetime import datetime
 import shutil
 import json
 
-# # Geojson Endpoint for NYC Open Data - 311 2010 - Present
+# Geojson Endpoint for NYC Open Data - 311 2010 - Present
 
 ENDPOINT = "https://data.cityofnewyork.us/resource/erm2-nwe9.geojson"
 QUERY_SYMBOL = '?'
@@ -59,10 +59,6 @@ data_centroid = [a,b]
 print(data_centroid)
 
 cb3_complaints = cb3_complaints_geo.to_json()
-
-cb3_complaints
-
-type(cb3_complaints)
 
 # ==============================================================
 # from os.path import join, dirname, realpath
