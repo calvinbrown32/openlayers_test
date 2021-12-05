@@ -1,3 +1,25 @@
+"""
+This goal of this script is to both test Openlayers features, but also to learn and apply JavaScript
+skills in conjunction with Python, Flask.
+
+Other skills that I hope to incorporate in this Web app: React, JQuery,
+
+Resources - Python and JavaScript
+https://flask.palletsprojects.com/en/2.0.x/patterns/jquery/
+https://blog.miguelgrinberg.com/post/how-to-create-a-react--flask-project
+https://towardsdatascience.com/talking-to-python-from-javascript-flask-and-the-fetch-api-e0ef3573c451
+https://www.jitsejan.com/python-and-javascript-in-flask
+
+
+
+TO DO:
+
+"""
+
+
+
+
+
 import os
 import pandas as pd
 import geopandas as gpd
